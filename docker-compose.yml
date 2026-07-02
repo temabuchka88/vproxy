@@ -1,0 +1,15 @@
+services:
+  socks5:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: vproxy-socks5
+    environment:
+      PORT: ${PORT:-1080}
+      PROXY_HOST: ${PROXY_HOST:-0.0.0.0}
+      PROXY_USERNAME: ${PROXY_USERNAME:-}
+      PROXY_PASSWORD: ${PROXY_PASSWORD:-}
+      VPROXY_LOG: ${VPROXY_LOG:-info}
+    ports:
+      - "${PORT:-1080}:${PORT:-1080}"
+    restart: unless-stopped

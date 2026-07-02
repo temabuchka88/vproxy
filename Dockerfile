@@ -18,9 +18,11 @@ FROM alpine:3.16
 
 # Copy the built binary from the builder stage
 COPY --from=builder /app/target/release/vproxy /bin/vproxy
+COPY docker/entrypoint.sh /entrypoint.sh
 
 # Iproute2 and procps are needed for the vproxy to work
-RUN apk add --no-cache iproute2 procps
+RUN apk add --no-cache iproute2 procps \
+    && chmod +x /entrypoint.sh
 
 # Set the entrypoint
-ENTRYPOINT ["/bin/vproxy"]
+ENTRYPOINT ["/entrypoint.sh"]

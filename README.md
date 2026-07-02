@@ -77,6 +77,21 @@ cargo install vproxy
 docker run --rm -it ghcr.io/0x676e67/vproxy:latest run http
 ```
 
+- Docker Compose (quick SOCKS5 start)
+
+```bash
+cp .env.example .env
+# edit PORT / PROXY_USERNAME / PROXY_PASSWORD
+docker compose up -d --build
+```
+
+The compose setup starts a SOCKS5 proxy and reads its configuration from `.env`:
+
+- `PORT` - listen port inside the container and published host port
+- `PROXY_USERNAME` - SOCKS5 username
+- `PROXY_PASSWORD` - SOCKS5 password
+- `PROXY_HOST` - bind host inside the container, default `0.0.0.0`
+
 ### Note
 
 If you run the program as root, it will automatically configure the sysctl `net.ipv6.ip_nonlocal_bind=1`, `net.ipv6.conf.all.disable_ipv6`, and `ip route add local 2001:470:e953::/48 dev lo` for you. Otherwise you will need to configure these settings manually.

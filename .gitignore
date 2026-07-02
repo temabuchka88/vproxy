@@ -19,6 +19,7 @@ Cargo.lock
 /target
 /bin
 .idea
+.env
 *.crt
 *.key
 *.pem
