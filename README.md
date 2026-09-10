@@ -13,13 +13,13 @@ A high-performance `HTTP`/`HTTPS`/`SOCKS5` proxy server
 ## Features
 
 - Proxy extensions
-- Concurrency limits 
+- Concurrency limits
 - Basic authentication
 - Auto protocol detection
 - Kernel-space zero-copy
 - `IPv4`/`IPv6` dual-stack
 - Service binding to specific `CIDR` addresses
-- SOCKS5: `CONNECT`/`BIND`/`ASSOCIATE`  
+- SOCKS5: `CONNECT`/`BIND`/`ASSOCIATE`
 
 ## Manual
 
@@ -208,7 +208,6 @@ vproxy run auto -u username -p password --tls-cert cert.pem --tls-key key.pem
 ```
 
 The auto-detection server automatically identifies the protocol type and routes connections to the appropriate handler.
-
 
 - TTL Extension
 
@@ -556,7 +555,6 @@ $ proxychains iperf3 -c 127.0.0.1 -R -P 10
 ```
 
 </details>
-
 
 ## Contributing
 
