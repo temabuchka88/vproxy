@@ -1,8 +1,7 @@
 services:
   vproxy:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: ${VPROXY_IMAGE:-ghcr.io/temabuchka88/vproxy:latest}
+    pull_policy: always
     container_name: vproxy
     environment:
       PORT: ${PORT:-1080}

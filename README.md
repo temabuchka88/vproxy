@@ -77,20 +77,28 @@ cargo install vproxy
 docker run --rm -it ghcr.io/0x676e67/vproxy:latest run http
 ```
 
-- Docker Compose (quick SOCKS5 start)
+- Docker Compose (quick proxy start)
 
 ```bash
 cp .env.example .env
 # edit PORT / PROXY_USERNAME / PROXY_PASSWORD
-docker compose up -d --build
+docker compose up -d
 ```
 
-The compose setup starts a SOCKS5 proxy and reads its configuration from `.env`:
+The image is built by GitHub Actions on every push to `main` and published to GHCR. The server only pulls the ready image, so it does not need Rust or a local build toolchain.
+
+The compose setup starts an auto-detecting proxy and reads its configuration from `.env`:
 
 - `PORT` - listen port inside the container and published host port
-- `PROXY_USERNAME` - SOCKS5 username
-- `PROXY_PASSWORD` - SOCKS5 password
+- `PROXY_USERNAME` - proxy username
+- `PROXY_PASSWORD` - proxy password
 - `PROXY_HOST` - bind host inside the container, default `0.0.0.0`
+
+After changing `.env`, apply the new runtime settings with:
+
+```bash
+docker compose up -d
+```
 
 ### Note
 
