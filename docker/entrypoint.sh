@@ -9,7 +9,7 @@ PORT="${PORT:-1080}"
 PROXY_HOST="${PROXY_HOST:-0.0.0.0}"
 VPROXY_LOG="${VPROXY_LOG:-info}"
 
-set -- /bin/vproxy run --log "$VPROXY_LOG" --bind "${PROXY_HOST}:${PORT}" socks5
+set -- /bin/vproxy run --log "$VPROXY_LOG" --bind "${PROXY_HOST}:${PORT}" auto
 
 if [ "${PROXY_USERNAME:-}" ] || [ "${PROXY_PASSWORD:-}" ]; then
     if [ -z "${PROXY_USERNAME:-}" ] || [ -z "${PROXY_PASSWORD:-}" ]; then
