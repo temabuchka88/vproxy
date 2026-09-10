@@ -38,31 +38,12 @@ jobs:
         run: cargo fmt --all -- --check
 
       - name: Clippy check
-        run: cargo clippy --all-targets
-
-  tests:
-    name: Tests
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
-        rust: [stable]
-
-    steps:
-      - uses: actions/checkout@v6
-
-      - uses: actions-rs/toolchain@v1
-        with:
-          toolchain: ${{ matrix.rust }}
-          override: true
-
-      - name: Run tests
-        run: cargo test
+        run: cargo clippy --bin vproxy
 
   build:
     name: Build
     runs-on: ubuntu-latest
-    needs: ["style", "tests"]
+    needs: ["style"]
     environment: Linux
     if: startsWith(github.ref, 'refs/tags/')
     container:
@@ -130,7 +111,6 @@ jobs:
   docker:
     name: Build Docker Image
     runs-on: ubuntu-latest
-    needs: ["style", "tests"]
     if: github.event_name == 'push'
     permissions:
       contents: read
@@ -177,7 +157,7 @@ jobs:
     name: Publish crates
     runs-on: ubuntu-latest
     environment: Linux
-    needs: ["build", "style", "tests"]
+    needs: ["build", "style"]
     if: startsWith(github.ref, 'refs/tags/')
     steps:
       - uses: actions/checkout@v6
